@@ -52,5 +52,3 @@ export async function getDetails(slug: string) {
     throw new Error("Failed get details");
   }
 }
-
-//https://api.cosmicjs.com/v3/buckets/blog-dev-blog-dev/objects/677e8b8714e916955b7f85e5?pretty=true&read_key=WGy8GQvLDNkJE5pbJ4nYv56qB3soEPiHT2KTv1qLq1heY5DKrJ&depth=1&props=slug%2Ctitle%2Cmetadata&limit=10&skip=0&sort=-order
