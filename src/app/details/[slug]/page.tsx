@@ -9,11 +9,11 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
-
   try {
+    const resolvedParams = await params;
+    const { slug } = resolvedParams;
     const { objects }: DetailProps = await getDetails(slug).catch(() => {
       return {
         title: "Blog | Porquê das coisas",
@@ -54,9 +54,10 @@ export async function generateMetadata({
 export default async function Details({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const resolvedParams = await params;
+  const { slug } = resolvedParams;
   const { objects }: DetailProps = await getDetails(slug);
 
   return (
