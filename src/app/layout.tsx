@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Blog | Porquê das coisas",
-    images: [`${process.env.NEXT_PUBLIC_URL}/mundo.jpg`],
+    images: [`${process.env.NEXT_PUBLIC_URL}mundo.jpg`],
   },
   robots: {
     index: true,
