@@ -12,7 +12,7 @@ interface ObjectsProps {
     content: {
       title: string;
       summary: string;
-      content_total: string;
+      description: string;
       data: string;
     };
   };

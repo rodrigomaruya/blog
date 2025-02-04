@@ -1,6 +1,7 @@
 import { CardPost } from "@/components/cardPost";
 import { Container } from "@/components/container";
-import { getPost } from "@/utils/actions/get-data";
+import { getCategoryPost, getPost } from "@/utils/actions/get-data";
+import { CategoryProps } from "@/utils/category-type";
 import { PostProps } from "@/utils/post-type";
 import { Metadata } from "next";
 
@@ -29,23 +30,29 @@ export const metadata: Metadata = {
 
 export default async function Post() {
   const postData: PostProps = await getPost();
+  const newData: CategoryProps = await getCategoryPost();
+
+  console.log(newData.objects.map((item) => item.slug));
+
   return (
     <main className="w-full min-h-screen">
       <Container>
         <h1 className="mt-7 text-center text-red-500 font-bold text-3xl md:text-5xl">
           Porquê das coisas
         </h1>
-        {postData.objects.length > 0 &&
-          postData.objects.map((item) => (
+        <div>
+          {newData.objects.map((item) => (
             <CardPost
-              key={item.slug}
-              url={item.metadata.banner.url}
-              title={item.metadata.content.title}
-              summary={item.metadata.content.summary}
-              data={item.metadata.content.data}
+              key={item.metadata.category[0].title}
+              url={item.metadata.category[0].banner.url}
+              title={item.metadata.category[0].title}
+              summary={item.metadata.category[0].subtitle}
+              data={item.metadata.category[0].datenow}
               slug={item.slug}
+              description={item.metadata.category[0].description}
             />
           ))}
+        </div>
       </Container>
     </main>
   );

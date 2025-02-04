@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
+import { CategoryProps } from "@/utils/category-type";
 
 export async function generateMetadata({
   params,
@@ -54,19 +55,25 @@ export async function generateMetadata({
 export default async function Details({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; title: string }>;
 }) {
   const resolvedParams = await params;
-  const { slug } = resolvedParams;
-  const { objects }: DetailProps = await getDetails(slug);
+  const { slug, title } = resolvedParams;
+  const { objects }: CategoryProps = await getDetails(slug);
+  const findTitle = decodeURIComponent(title);
+
+  const findDetails = objects[0].metadata.category.find(
+    (item) => decodeURI(item.title) === findTitle
+  );
+  console.log(findDetails?.title);
 
   return (
     <main className="min-h-screen pb-14 md:pb-10 relative  ">
       <Container>
         <div className="relative max-w-5xl  h-[300px] md:h-[400px] my-8 mx-auto rounded-md">
           <Image
-            src={objects[0].metadata.banner.url}
-            alt={objects[0].slug}
+            src={findDetails?.banner.url as string}
+            alt={findDetails?.title as string}
             priority={true}
             fill={true}
             quality={100}
@@ -75,13 +82,13 @@ export default async function Details({
         </div>
         <div className="flex flex-col justify-center gap-4 w-full max-w-5xl mx-auto">
           <h1 className="text-center text-red-600 font-bold text-xl md:text-2xl">
-            {objects[0].metadata.content.title}
+            {findDetails?.title}
           </h1>
           <p className=" leading-relaxed text-lg md:text-xl ">
-            {objects[0].metadata.content.content_total}
+            {findDetails?.description}
           </p>
           <p className=" leading-relaxed md:text-lg">
-            Data de publicação: <span>{objects[0].metadata.content.data}</span>
+            Data de publicação: <span>{findDetails?.datenow}</span>
           </p>
         </div>
         <div className="flex max-w-5xl justify-end mx-auto mt-4">

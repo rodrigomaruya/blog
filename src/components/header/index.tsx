@@ -1,47 +1,29 @@
-"use client";
-import { useState, useEffect } from "react";
-import { Menu } from "lucide-react";
-import Link from "next/link";
-import { NavMenu } from "../navMenu";
+import { NavComponents } from "../navComponents";
+import { getOnlyCategory } from "@/utils/actions/get-data";
 
-export function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+export interface DataProps {
+  objects: CategoryProps[];
+}
 
-  useEffect(() => {
-    function resize() {
-      window.innerWidth > 640 ? setIsOpen(false) : "";
-    }
-    window.addEventListener("resize", resize);
+interface CategoryProps {
+  slug: string;
+  title: string;
+}
 
-    return () => {
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-  function handleOpen() {
-    setIsOpen(!isOpen);
-  }
+export async function Header() {
+  const data: DataProps = await getOnlyCategory();
+
   return (
-    <header
+    <div
       className="w-full h-20
-     bg-slate-900 "
+     bg-slate-900 z-50 relative "
     >
-      <div className="flex items-center justify-between  px-4 mx-auto  h-full w-full md:px-14">
-        <div className="text-xl md:text-2xl font-bold text-white ">
-          <Link href={"/"}>
-            <h1>Blog Porquê das coisas</h1>
-          </Link>
-        </div>
-        <button className="flex sm:hidden" onClick={handleOpen}>
-          <Menu size={30} color="#fff" />
-        </button>
-        <nav className="hidden sm:flex gap-4 font-semibold text-white">
-          <Link href={"/"}>Home</Link>
-          <Link href={"/post"}>Posts</Link>
-
-          <Link href={"/about"}>About</Link>
-        </nav>
-      </div>
-      <NavMenu IsOpen={() => setIsOpen(false)} open={isOpen} />
-    </header>
+      <header
+        className="w-full h-full 
+     bg-slate-900  absolute z-10 top-0 left-0 "
+      >
+        <NavComponents data={data} />
+      </header>
+    </div>
   );
 }
