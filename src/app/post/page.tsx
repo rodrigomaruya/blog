@@ -1,8 +1,8 @@
 import { CardPost } from "@/components/cardPost";
 import { Container } from "@/components/container";
-import { getCategoryPost, getPost } from "@/utils/actions/get-data";
+import { getCategoryPost } from "@/utils/actions/get-data";
 import { CategoryProps } from "@/utils/category-type";
-import { PostProps } from "@/utils/post-type";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -29,10 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Post() {
-  const postData: PostProps = await getPost();
   const newData: CategoryProps = await getCategoryPost();
-
-  console.log(newData.objects.map((item) => item.slug));
 
   return (
     <main className="w-full min-h-screen">

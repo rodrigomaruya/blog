@@ -15,21 +15,6 @@ export async function getBannerVideo() {
   }
 }
 
-export async function getPost() {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/objects?pretty=true&query=%7B%22type%22:%22pages%22%7D&limit=10&skip=0&read_key=${process.env.READ_KEY}&depth=1&props=slug,title,metadata`,
-      { next: { revalidate: 50000 } }
-    );
-    if (!res.ok) {
-      throw new Error("Failed get post");
-    }
-    return res.json();
-  } catch (error) {
-    throw new Error("Failed get post");
-  }
-}
-
 export async function getDetails(slug: string) {
   const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/objects`;
 
