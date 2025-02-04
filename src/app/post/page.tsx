@@ -30,6 +30,10 @@ export const metadata: Metadata = {
 
 export default async function Post() {
   const newData: CategoryProps = await getCategoryPost();
+  console.log(
+    newData.objects.map((item) => item.metadata.category.at(-1)?.title) +
+      "======="
+  );
 
   return (
     <main className="w-full min-h-screen">
@@ -40,13 +44,13 @@ export default async function Post() {
         <div>
           {newData.objects.map((item) => (
             <CardPost
-              key={item.metadata.category[0].title}
-              url={item.metadata.category[0].banner.url}
-              title={item.metadata.category[0].title}
-              summary={item.metadata.category[0].subtitle}
-              data={item.metadata.category[0].datenow}
+              key={item.metadata.category.at(-1)?.title}
+              url={item.metadata.category.at(-1)?.banner.url as string}
+              title={item.metadata.category.at(-1)?.title as string}
+              summary={item.metadata.category.at(-1)?.subtitle as string}
+              data={item.metadata.category.at(-1)?.datenow as string}
               slug={item.slug}
-              description={item.metadata.category[0].description}
+              description={item.metadata.category.at(-1)?.description as string}
             />
           ))}
         </div>
