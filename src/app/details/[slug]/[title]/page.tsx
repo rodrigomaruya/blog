@@ -10,27 +10,32 @@ import { CategoryProps } from "@/utils/category-type";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; title: string }>;
 }): Promise<Metadata> {
   try {
     const resolvedParams = await params;
-    const { slug } = resolvedParams;
-    const { objects }: DetailProps = await getDetails(slug).catch(() => {
+    const { slug, title } = resolvedParams;
+    const findTitle = decodeURIComponent(title);
+    const { objects }: CategoryProps = await getDetails(slug).catch(() => {
+      console.log(objects + "============");
       return {
         title: "Blog | Porquê das coisas",
         description:
           "Por quê? Porque a curiosidade é a verdadeira essência do conhecimento.",
       };
     });
+    const findDetails = objects[0].metadata.category.find(
+      (item) => decodeURI(item.title) === findTitle
+    );
     return {
-      title: `Blog | ${objects[0].metadata.content.title}`,
-      description: `${objects[0].metadata.content.summary}`,
+      title: `Blog | ${findDetails?.title}`,
+      description: `${findDetails?.subtitle}`,
       keywords: [
         "tecnologia, finanças, programação, curiosidades, inovação, aprendizado, desenvolvimento, transformação digital, exploração de ideias",
       ],
       openGraph: {
-        title: `Blog | ${objects[0].metadata.content.title}`,
-        images: [`${objects[0].metadata.banner.url}`],
+        title: `Blog | ${findDetails?.title}`,
+        images: [`${findDetails?.banner.url}`],
       },
       robots: {
         index: true,
