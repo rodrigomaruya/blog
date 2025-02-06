@@ -1,6 +1,5 @@
 import { Container } from "@/components/container";
 import { getDetails } from "@/utils/actions/get-data";
-import { DetailProps } from "@/utils/details-type";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -10,14 +9,13 @@ import { CategoryProps } from "@/utils/category-type";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string; title: string }>;
+  params: Promise<{ slug: string; urltitle: string }>;
 }): Promise<Metadata> {
   try {
     const resolvedParams = await params;
-    const { slug, title } = resolvedParams;
-    const findTitle = decodeURIComponent(title);
+    const { slug, urltitle } = resolvedParams;
+    const findTitle = urltitle;
     const { objects }: CategoryProps = await getDetails(slug).catch(() => {
-      console.log(objects + "============");
       return {
         title: "Blog | Porquê das coisas",
         description:
@@ -25,8 +23,9 @@ export async function generateMetadata({
       };
     });
     const findDetails = objects[0].metadata.category.find(
-      (item) => decodeURI(item.title) === findTitle
+      (item) => item.urltitle === findTitle
     );
+
     return {
       title: `Blog | ${findDetails?.title}`,
       description: `${findDetails?.subtitle}`,
@@ -60,17 +59,16 @@ export async function generateMetadata({
 export default async function Details({
   params,
 }: {
-  params: Promise<{ slug: string; title: string }>;
+  params: Promise<{ slug: string; urltitle: string }>;
 }) {
   const resolvedParams = await params;
-  const { slug, title } = resolvedParams;
+  const { slug, urltitle } = resolvedParams;
   const { objects }: CategoryProps = await getDetails(slug);
-  const findTitle = decodeURIComponent(title);
+  const findTitle = urltitle;
 
   const findDetails = objects[0].metadata.category.find(
-    (item) => decodeURI(item.title) === findTitle
+    (item) => item.urltitle === findTitle
   );
-  console.log(findDetails?.title);
 
   return (
     <main className="min-h-screen pb-14 md:pb-10 relative  ">

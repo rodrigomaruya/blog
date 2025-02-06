@@ -36,7 +36,7 @@ export function NavMenu({ IsOpen, open, data }: NavMenuPros) {
           <div className="flex flex-col border-t w-11/12 py-4">
             <h2 className="font-bold mb-4">Categorias</h2>
 
-            <ul className="flex flex-col gap-1 text-base">
+            <ul className="flex flex-col gap-3 text-sm">
               {data.objects.map((item) => (
                 <li key={item.slug}>
                   <a href={`/categoria/${item.slug}`}>{item.title}</a>

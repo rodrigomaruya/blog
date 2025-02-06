@@ -11,9 +11,17 @@ interface CardProps {
   data: string;
   slug: string;
   description: string;
+  urltitle: string;
 }
 
-export function CardPost({ url, title, summary, data, slug }: CardProps) {
+export function CardPost({
+  url,
+  title,
+  summary,
+  data,
+  slug,
+  urltitle,
+}: CardProps) {
   return (
     <section className=" md:w-3/4 md:mx-auto my-8 px-3 py-1 shadow-md ">
       <div className="py-2">
@@ -37,7 +45,7 @@ export function CardPost({ url, title, summary, data, slug }: CardProps) {
         </h2>
         <p className="leading-relaxed mb-2  text-lg md:text-2xl">{summary}</p>
         <Link
-          href={`/details/${slug}/${encodeURIComponent(title)}`}
+          href={`/details/${slug}/${urltitle}`}
           className="flex gap-2 text-red-400"
         >
           <ArrowRight /> Clique aqui para saber mais...

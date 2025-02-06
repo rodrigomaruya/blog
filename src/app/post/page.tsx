@@ -30,10 +30,6 @@ export const metadata: Metadata = {
 
 export default async function Post() {
   const newData: CategoryProps = await getCategoryPost();
-  console.log(
-    newData.objects.map((item) => item.metadata.category.at(-1)?.title) +
-      "======="
-  );
 
   return (
     <main className="w-full min-h-screen">
@@ -50,6 +46,7 @@ export default async function Post() {
               summary={item.metadata.category.at(-1)?.subtitle as string}
               data={item.metadata.category.at(-1)?.datenow as string}
               slug={item.slug}
+              urltitle={item.metadata.category.at(-1)?.urltitle as string}
               description={item.metadata.category.at(-1)?.description as string}
             />
           ))}

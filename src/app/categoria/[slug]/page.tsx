@@ -26,6 +26,7 @@ export default async function Categoria({
                 key={item.title}
                 url={item.banner.url}
                 title={item.title}
+                urltitle={item.urltitle}
                 summary={item.subtitle}
                 data={item.datenow}
                 slug={data.objects[0].slug}

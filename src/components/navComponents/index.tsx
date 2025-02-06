@@ -43,7 +43,7 @@ export function NavComponents({ data }: NavProps) {
           <Link href={"/post"}>Posts</Link>
           <details className="">
             <summary>Categoria</summary>
-            <ul className="absolute m-1 bg-slate-900 px-4 rounded-md py-2">
+            <ul className="absolute m-1 bg-slate-900 px-4 rounded-md py-5 flex flex-col gap-4">
               {data.objects.map((item) => (
                 <li key={item.slug}>
                   <a href={`/categoria/${item.slug}`}>{item.title}</a>
