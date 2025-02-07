@@ -32,7 +32,7 @@ export function NavComponents({ data }: NavProps) {
       <div className="flex items-center justify-between  px-4 mx-auto  h-full w-full md:px-14">
         <div className="text-xl md:text-2xl font-bold text-white ">
           <Link href={"/"}>
-            <h1>Blog Porquê das coisas</h1>
+            <h1>Blog Curiosidade sem limites</h1>
           </Link>
         </div>
         <button className="flex sm:hidden" onClick={handleOpen}>

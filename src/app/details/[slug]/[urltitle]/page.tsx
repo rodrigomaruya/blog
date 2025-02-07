@@ -88,7 +88,11 @@ export default async function Details({
             {findDetails?.title}
           </h1>
           <p className=" leading-relaxed text-lg md:text-xl ">
-            {findDetails?.description}
+            {findDetails?.description.split("\n").map((paragrafo, index) => (
+              <p key={index} className="text-md leading-relaxed">
+                {paragrafo}
+              </p>
+            ))}
           </p>
           <p className=" leading-relaxed md:text-lg">
             Data de publicação: <span>{findDetails?.datenow}</span>

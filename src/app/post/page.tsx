@@ -35,7 +35,7 @@ export default async function Post() {
     <main className="w-full min-h-screen">
       <Container>
         <h1 className="mt-7 text-center text-red-500 font-bold text-3xl md:text-5xl">
-          Porquê das coisas
+          Curiosidade mais recentes
         </h1>
         <div>
           {newData.objects.map((item) => (
