@@ -16,15 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Blog | Porquê das coisas",
+  title: "Blog | Curiosidade sem limites",
   description:
     "Por quê? Porque a curiosidade é a verdadeira essência do conhecimento.",
   keywords: [
     "tecnologia, finanças, programação, curiosidades, inovação, aprendizado, desenvolvimento, transformação digital, exploração de ideias",
   ],
+  icons: "/favicon.png",
 
   openGraph: {
-    title: "Blog | Porquê das coisas",
+    title: "Blog | Curiosidade sem limites",
     images: [`${process.env.NEXT_PUBLIC_URL}/mundo.jpg`],
   },
   robots: {
