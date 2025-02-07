@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://curiosidade-sem-limites.vercel.app
+
+# Sitemaps
+Sitemap: https://curiosidade-sem-limites.vercel.app/sitemap.xml
