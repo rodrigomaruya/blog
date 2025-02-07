@@ -22,9 +22,10 @@ export const metadata: Metadata = {
   keywords: [
     "tecnologia, finanças, programação, curiosidades, inovação, aprendizado, desenvolvimento, transformação digital, exploração de ideias",
   ],
+
   openGraph: {
     title: "Blog | Porquê das coisas",
-    images: [`${process.env.NEXT_PUBLIC_URL}mundo.jpg`],
+    images: [`${process.env.NEXT_PUBLIC_URL}/mundo.jpg`],
   },
   robots: {
     index: true,
