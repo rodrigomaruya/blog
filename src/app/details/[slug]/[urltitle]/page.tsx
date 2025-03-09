@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 import { CategoryProps } from "@/utils/category-type";
+import ReactMarkdown from "react-markdown";
 
 export async function generateMetadata({
   params,
@@ -64,6 +65,7 @@ export default async function Details({
   const resolvedParams = await params;
   const { slug, urltitle } = resolvedParams;
   const { objects }: CategoryProps = await getDetails(slug);
+
   const findTitle = urltitle;
 
   const findDetails = objects[0].metadata.category.find(
@@ -87,13 +89,8 @@ export default async function Details({
           <h1 className="text-center text-red-600 font-bold text-xl md:text-2xl">
             {findDetails?.title}
           </h1>
-          <p className=" leading-relaxed text-lg md:text-xl ">
-            {findDetails?.description.split("\n").map((paragrafo, index) => (
-              <p key={index} className="text-md leading-relaxed">
-                {paragrafo}
-              </p>
-            ))}
-          </p>
+
+          <ReactMarkdown>{findDetails?.content}</ReactMarkdown>
           <p className=" leading-relaxed md:text-lg">
             Data de publicação: <span>{findDetails?.datenow}</span>
           </p>

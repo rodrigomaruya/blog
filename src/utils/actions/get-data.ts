@@ -2,7 +2,7 @@ export async function getBannerVideo() {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/objects/677f09e414e916955b7f86c3?pretty=true&read_key=${process.env.READ_KEY}&depth=1&props=slug,title,metadata,type`,
-      { next: { revalidate: 50000 } }
+      { next: { revalidate: 120 } }
     );
 
     if (!res.ok) {
@@ -28,10 +28,11 @@ export async function getDetails(slug: string) {
   const url = `${baseUrl}?${queryParams.toString()}`;
 
   try {
-    const res = await fetch(url, { next: { revalidate: 50000 } });
+    const res = await fetch(url, { next: { revalidate: 120 } });
     if (!res.ok) {
       throw new Error("Failed get details");
     }
+
     return res.json();
   } catch (error) {
     throw new Error("Failed get details");

@@ -18,6 +18,6 @@ interface TitleProps {
   title: string;
   urltitle: string;
   subtitle: string;
-  description: string;
+  content: string;
   datenow: string;
 }
