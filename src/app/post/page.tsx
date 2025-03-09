@@ -47,7 +47,6 @@ export default async function Post() {
               data={item.metadata.category.at(-1)?.datenow as string}
               slug={item.slug}
               urltitle={item.metadata.category.at(-1)?.urltitle as string}
-              description={item.metadata.category.at(-1)?.description as string}
             />
           ))}
         </div>
