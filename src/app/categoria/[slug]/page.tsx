@@ -30,7 +30,6 @@ export default async function Categoria({
                 summary={item.subtitle}
                 data={item.datenow}
                 slug={data.objects[0].slug}
-                description={item.description}
               />
             ))}
         </div>
