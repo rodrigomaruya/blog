@@ -10,7 +10,6 @@ interface CardProps {
   summary: string;
   data: string;
   slug: string;
-
   urltitle: string;
 }
 
