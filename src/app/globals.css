@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 100%;
+  }
+  @media (max-width: 720px) {
+    html {
+      font-size: 87.5%;
+    }
+  }
+  @media (max-width: 1080px) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+}
+
+@layer {
+  h1 {
+    @apply text-5xl font-bold;
+  }
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+  @media (max-width: 720px) {
+    h1 {
+      @apply text-3xl;
+    }
+    h2 {
+      @apply text-2xl;
+    }
+  }
+}

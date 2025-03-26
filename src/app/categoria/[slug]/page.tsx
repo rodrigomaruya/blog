@@ -16,9 +16,7 @@ export default async function Categoria({
   return (
     <Container>
       <section className="min-h-screen py-4">
-        <h1 className="text-center text-2xl lg:text-3xl">
-          {slug.toUpperCase()}
-        </h1>
+        <h1 className="text-center">{slug.toUpperCase()}</h1>
         <div>
           {data.objects.length > 0 &&
             data.objects[0].metadata.category.map((item) => (

@@ -29,7 +29,7 @@ export function NavComponents({ data }: NavProps) {
   }
   return (
     <>
-      <div className="flex items-center justify-between  px-4 mx-auto  h-full w-full md:px-14">
+      <div className="flex items-center justify-between  px-4 mx-auto h-full w-full">
         <div className="text-xl md:text-2xl font-bold text-white ">
           <Link href={"/"}>
             <h1>Blog Curiosidade sem limites</h1>

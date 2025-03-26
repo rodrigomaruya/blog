@@ -1,7 +1,7 @@
 import { Container } from "@/components/container";
 import { getDetails } from "@/utils/actions/get-data";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CalendarDays } from "lucide-react";
 import Link from "next/link";
 import { Metadata } from "next";
 import { CategoryProps } from "@/utils/category-type";
@@ -73,9 +73,13 @@ export default async function Details({
   );
 
   return (
-    <main className="min-h-screen pb-14 md:pb-10 relative  ">
+    <main className="min-h-screen pb-14 md:pb-10 relative">
       <Container>
-        <div className="relative max-w-5xl  h-[300px] md:h-[400px] my-8 mx-auto rounded-md">
+        <p className=" leading-relaxed mx-auto max-w-7xl py-4 flex items-center gap-2 text-slate-400">
+          <CalendarDays size={20} />{" "}
+          <span className="text-slate-800">{findDetails?.datenow}</span>
+        </p>
+        <div className="relative max-w-7xl h-[300px] md:h-[400px] mx-auto rounded-md">
           <Image
             src={findDetails?.banner.url as string}
             alt={findDetails?.title as string}
@@ -85,22 +89,22 @@ export default async function Details({
             className="object-cover rounded-md"
           />
         </div>
-        <div className="flex flex-col justify-center gap-4 w-full max-w-5xl mx-auto">
-          <h1 className="text-center text-red-600 font-bold text-xl md:text-2xl">
+        <div className="flex flex-col justify-center gap-4 w-full max-w-7xl mx-auto pt-2">
+          <h1 className="text-center text-red-600 font-bold">
             {findDetails?.title}
           </h1>
 
           <ReactMarkdown>{findDetails?.content}</ReactMarkdown>
-          <p className=" leading-relaxed md:text-lg">
-            Data de publicação: <span>{findDetails?.datenow}</span>
-          </p>
         </div>
-        <div className="flex max-w-5xl justify-end mx-auto mt-4">
-          <div className="w-10 h-10 flex justify-center items-center  rounded-full bg-green-700 font-bold ">
-            <Link href={"/post"}>
-              <ArrowLeft color="#fff" />
-            </Link>
-          </div>
+
+        <div className="flex flex-col max-w-7xl w-full justify-end items-end mt-4">
+          <Link
+            href={"/post"}
+            className="w-10 h-10 flex justify-center items-center  rounded-full bg-green-700 font-bold "
+          >
+            <ArrowLeft color="#fff" />
+          </Link>
+          Voltar
         </div>
       </Container>
     </main>

@@ -14,16 +14,13 @@ export async function Header() {
   const data: DataProps = await getOnlyCategory();
 
   return (
-    <div
-      className="w-full h-20
-     bg-slate-900 z-50 relative "
+    <header
+      className="w-full 
+     bg-slate-900 z-10 top-0 left-0 sticky h-20"
     >
-      <header
-        className="w-full h-full 
-     bg-slate-900  absolute z-10 top-0 left-0 "
-      >
+      <div className="max-w-7xl flex items-center h-full mx-auto">
         <NavComponents data={data} />
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }
