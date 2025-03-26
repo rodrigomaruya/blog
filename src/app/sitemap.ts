@@ -1,24 +1,29 @@
 import type { MetadataRoute } from "next";
+import { getAllPosts } from "@/utils/actions/get-data";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getAllPosts();
+
+  const dynamicPages = posts.map((post: { slug: any; urltitle: any }) => ({
+    url: `${process.env.NEXT_PUBLIC_URL}/detail/${post.slug}/${post.urltitle}`,
+    lastModified: new Date().toISOString(),
+  }));
+
+  // Definir páginas estáticas
+  const staticPages = [
     {
       url: `${process.env.NEXT_PUBLIC_URL}/`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 1,
+      lastModified: new Date().toISOString(),
     },
     {
       url: `${process.env.NEXT_PUBLIC_URL}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
+      lastModified: new Date().toISOString(),
     },
     {
       url: `${process.env.NEXT_PUBLIC_URL}/post`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.5,
+      lastModified: new Date().toISOString(),
     },
   ];
+
+  return [...staticPages, ...dynamicPages];
 }

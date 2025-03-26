@@ -39,6 +39,38 @@ export async function getDetails(slug: string) {
   }
 }
 
+export async function getAllPosts() {
+  const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/objects`;
+
+  const queryParams = new URLSearchParams({
+    query: JSON.stringify({}), // Busca todos os posts
+    props: "slug,metadata",
+    read_key: process.env.READ_KEY as string,
+  });
+
+  const url = `${baseUrl}?${queryParams.toString()}`;
+
+  try {
+    const res = await fetch(url, { next: { revalidate: 300 } }); // Atualiza a cada 5 min
+    if (!res.ok) {
+      throw new Error("Failed to get all posts");
+    }
+
+    const data = await res.json();
+
+    // Retornar apenas os dados necessários
+    return data.objects.map(
+      (post: { slug: any; metadata: { urltitle: any } }) => ({
+        slug: post.slug,
+        urltitle: post.metadata?.urltitle || "", // Evita erro se não existir
+      })
+    );
+  } catch (error) {
+    console.error("Error fetching all posts:", error);
+    return [];
+  }
+}
+
 export async function getCategoryList(slug: string) {
   const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/objects`;
   const queryParams = new URLSearchParams({
